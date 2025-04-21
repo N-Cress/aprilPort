@@ -101,16 +101,16 @@ export default function Home() {
       <div  className=" pl-54 max-w-220">
         <div >
           <div className="pb-4 ">
-          I'm a developer who thrives on continuous learning and adapting to new challenges. Whether it’s exploring emerging technologies or refining established practices, I’m driven by curiosity and a desire to grow. I focus on building flexible, accessible interfaces that evolve alongside user needs and industry trends—balancing clean design with resilient, future-ready code.
+          I&apos;m a developer who thrives on continuous learning and adapting to new challenges. Whether it’s exploring emerging technologies or refining established practices, I’m driven by curiosity and a desire to grow. I focus on building flexible, accessible interfaces that evolve alongside user needs and industry trends—balancing clean design with resilient, future-ready code.
           </div>
           <div className="pb-4">
-          I'm an aspiring front-end developer with a strong interest in accessibility and inclusive design. In my recent work and projects, I've focused on building and refining UI components with accessibility best practices in mind—aiming to create user experiences that are both intuitive and inclusive. I'm eager to contribute to teams that value thoughtful, user-centered development and to continue growing my skills in a collaborative environment.
+          I&apos;m an aspiring front-end developer with a strong interest in accessibility and inclusive design. In my recent work and projects, I&apos;ve focused on building and refining UI components with accessibility best practices in mind—aiming to create user experiences that are both intuitive and inclusive. I&apos;m eager to contribute to teams that value thoughtful, user-centered development and to continue growing my skills in a collaborative environment.
           </div>
           <div className="pb-4">
           I’ve spent the past year working in IT, where I built a strong foundation in tech and problem-solving. It was a great experience, but over time, I found myself increasingly drawn to web development. I started learning on my own, building small projects and getting hands-on with modern web technologies. Now I’m excited to take the next step and grow as a developer in a professional setting.
           </div>
           <div>
-          In my free time, I enjoy reading, hiking, or playing whatever fighting game I'm currently into.
+          In my free time, I enjoy reading, hiking, or playing whatever fighting game I&apos;m currently into.
           </div>
         </div>
         <div id="projects">
@@ -132,7 +132,7 @@ export default function Home() {
                 </div>
                 <div className="">
                   <div className="white flex group-hover:!text-blue-400"> Netflix Clone  <FaLink className="transition-all duration-300 ease-in-out ml-1 pl-1  group-hover:scale-125"/> </div>
-                  <div> Uses TMDB's API to iterate through results to display in a fashion meant to mimic Netflix's homepage. Has sign in and sign up pages that uses Firebase for authentication.</div>
+                  <div> Uses TMDB&apos;s API to iterate through results to display in a fashion meant to mimic Netflix&apos;s homepage. Has sign in and sign up pages that uses Firebase for authentication.</div>
                 </div>
             </div>
           </Link>
@@ -154,7 +154,7 @@ export default function Home() {
                 </div>
                 <div className="">
                   <div className="white flex group-hover:!text-blue-400"> Movie API Search  <FaLink className="transition-all duration-300 ease-in-out ml-1 pl-1  group-hover:scale-125"/> </div>
-                  <div> Search page that uses results from OMDB's API to display movie results based on inputed query, which can then be sorted from oldest to newest. Each result can be clicked on for further information also pulled from OMDB. </div>
+                  <div> Search page that uses results from OMDB&apos;s API to display movie results based on inputed query, which can then be sorted from oldest to newest. Each result can be clicked on for further information also pulled from OMDB. </div>
                 </div>
             </div>
           </Link>
