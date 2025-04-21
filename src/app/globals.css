@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   font-family: "Roboto Condensed", sans-serif;
@@ -13,5 +16,20 @@ body {
 
 .line {
   border-bottom: 1px solid #F9F9F8;
+}
+
+.sticky-top {
+  position: -webkit-sticky;
+  position: sticky;
+  top: -1px;
+}
+
+.item-hover-effect:hover {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(8.6px);
+  -webkit-backdrop-filter: blur(8.6px);
+  cursor: pointer;
  
 }
