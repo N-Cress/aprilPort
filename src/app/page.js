@@ -6,9 +6,6 @@ import { FaGithub } from "react-icons/fa";
 import { FaRegFilePdf } from "react-icons/fa6";
 import { FaLink } from "react-icons/fa";
 
-
-
-
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 
