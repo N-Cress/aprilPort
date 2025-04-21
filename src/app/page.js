@@ -170,7 +170,7 @@ export default function Home() {
           </div>
         </Link>
         <div className="text-sm text-center mb-8">
-          Built within Visual Studio Code, using NextJS and TailwindCSS.
+          Built within Visual Studio Code, using NextJS and TailwindCSS. Deployed with Vercel.
         </div>
       </div>
     </div>
