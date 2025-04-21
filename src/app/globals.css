@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+
+body {
+  font-family: "Roboto Condensed", sans-serif;
+  background: #0F172A;
+  color: #7A8B9E;
+}
+
+.white {
+  color: #F3F1F1;
+}
+
+.line {
+  border-bottom: 1px solid #F9F9F8;
+ 
+}
