@@ -8,91 +8,24 @@ import { FaLink } from "react-icons/fa";
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
+import BackgroundEffect from "./components/backgroundEffect";
+import PageLinks from "./components/pageLinks";
 
 export default function Home() {
-  const [active, setActive] = useState('about');
   
-  const containerRef = useRef(null);
-  const overlayRef = useRef(null);
-
-  const mousePos = useRef({ x: 0, y: 0 });
-  const currentPos = useRef({ x: 0, y: 0 });
-  const animationFrame = useRef(null);
-
-  useEffect(() => {
-    const container = containerRef.current;
-    const overlay = overlayRef.current;
-
-    if (!container || !overlay) return;
-
-    const handleMouseMovement = (e) => {
-      const rect = container.getBoundingClientRect();
-      const x = e.clientX;
-      const y = e.clientY;
-
-      mousePos.current= {x, y}
-    
-
-    };
-
-    const handleMouseLeave = () => {
-      overlay.style.background = `none`;
-    };
-
-    const animate = () => {
-      currentPos.current.x += (mousePos.current.x - currentPos.current.x) * 0.2;
-      currentPos.current.y += (mousePos.current.y - currentPos.current.y) * 0.2;
-
-      const { x, y } = currentPos.current;
-      overlay.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(255, 255, 255, 0.15), transparent 200px)`;
-
-      animationFrame.current = requestAnimationFrame(animate);
-    };
-
-    container.addEventListener('mousemove', handleMouseMovement);
-    container.addEventListener('mouseleave', handleMouseLeave);
-    animationFrame.current = requestAnimationFrame(animate);
-
-    return () => {
-      container.removeEventListener('mousemove', handleMouseMovement);
-      container.removeEventListener('mouseleave', handleMouseLeave);
-      if (animationFrame.current) cancelAnimationFrame(animationFrame.current);
-    }
-  }, []);
-
   return (
-    <div ref={containerRef} id="about" className="flex flex-col items-start ml-4 mr-2 sm:ml-12 sm:mr-12 md:items-start md:flex-row md:justify-around md:ml-2 md:mr-2 pt-8 sm:pt-14 md:pt-28">
-      <div ref={overlayRef} className="fixed z-[-1] inset-0 pointer-events-none transition-all duration-200">
-      </div>
+    <div id="about" className="flex flex-col items-start ml-4 mr-2 sm:ml-12 sm:mr-12 md:items-start md:flex-row md:justify-around md:ml-2 md:mr-2 pt-8 sm:pt-14 md:pt-28">
+      <BackgroundEffect />
       <div className="static md:sticky md:top-28 h-full ">
         <div className="text-5xl font-bold white"> Noah Cress </div>
         <div className="pt-2 pb-4 text-xl white"> Front End Engineer </div>
         <div className="md:pb-18 w-80"> Striving to build user driven, responsive experiences for the web.</div>
         <div>
-          {}
-          <Link href="/#about">
-            <div onClick={() => setActive('about')} className="pb-2 cursor-pointer flex items-center group"> 
-              <div className={`line hidden md:block transition-all duration-300 ease-in-out group-hover:text-white group-hover:w-16 ${active === `about` ? "white w-16" : "w-8"}`}> </div> 
-              <div className={`pl-4 hidden md:block transition-all duration-300 ease-in-out group-hover:text-white ${active === "about" ? "white" : ""}`} > ABOUT </div> 
-            </div>
-          </Link>
-          <Link href="/#projects">
-            <div onClick={() => setActive('projects')} className="pb-2 cursor-pointer flex items-center group"> 
-              <div className={`line hidden md:block transition-all duration-300 ease-in-out group-hover:text-white group-hover:w-16 ${active === `projects` ? "w-16" : "w-8"}`}> </div> 
-              <div className={`pl-4 hidden md:block transition-all duration-300 ease-in-out group-hover:text-white ${active === "projects" ? "white" : ""}`}> PROJECTS </div> 
-            </div>
-          </Link>
-          <Link href="#experience">
-            <div onClick={() => setActive('experience')} className=" cursor-pointer flex items-center group"> 
-              <div className={`line hidden md:block transition-all duration-300 ease-in-out group-hover:text-white group-hover:w-16 ${active === `experience` ? "w-16" : "w-8"}`}> </div> 
-              <div className={`pl-4 hidden md:block transition-all duration-300 ease-in-out group-hover:text-white ${active === "experience" ? "white" : ""}`}> EXPERIENCE </div> 
-            </div>
-          </Link>
+          <PageLinks />
           <div className="flex pt-4 pb-12 md:pb-0 md:pt-80">
             <Link target="_blank" href="https://www.linkedin.com/in/noah-c-47046795/"> <FaLinkedinIn className="w-8 h-8" /> </Link>
             <Link target="_blank" href="https://github.com/N-Cress"> <FaGithub className="ml-6 w-8 h-8"/> </Link>
             <Link target="_blank" href="/Noah-Resume-April.pdf"> <FaRegFilePdf className="ml-6 w-8 h-8"/> </Link>
-
           </div>
         </div>
       </div>
