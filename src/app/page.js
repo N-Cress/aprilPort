@@ -6,18 +6,29 @@ import { FaGithub } from "react-icons/fa";
 import { FaRegFilePdf } from "react-icons/fa6";
 import { FaLink } from "react-icons/fa";
 
-import { useState, useRef, useEffect } from "react";
+
 import Link from "next/link";
 import BackgroundEffect from "./components/backgroundEffect";
 import PageLinks from "./components/pageLinks";
+import { useEffect } from 'react'
+import AOS from 'aos'
+import 'aos/dist/aos.css'
+
 
 export default function Home() {
-  
+
+  useEffect(() => {
+    AOS.init({
+      duration: 800, // animation duration in ms
+      once: false, // whether animation should happen only once
+    })
+  }, [])
+
   return (
     <div id="about" className="flex flex-col items-start ml-4 mr-2 sm:ml-12 sm:mr-12 md:items-start md:flex-row md:justify-around md:ml-2 md:mr-2 pt-8 sm:pt-14 md:pt-28">
       <BackgroundEffect />
-      <div className="static md:sticky md:top-28 h-full ">
-        <div className="text-5xl font-bold white"> Noah Cress </div>
+      <div data-aos="fade-down" className="static md:sticky md:top-28 h-full ">
+        <div  className="text-5xl font-bold white"> Noah Cress </div>
         <div className="pt-2 pb-4 text-xl white"> Front End Engineer </div>
         <div className="md:pb-18 w-80"> Striving to build user driven, responsive experiences for the web.</div>
         <div>
@@ -30,7 +41,7 @@ export default function Home() {
         </div>
       </div>
       <div  className="w-full md:max-w-100 lg:max-w-160 xl:max-w-220">
-        <div className="text-sm md:text-base">
+        <div data-aos="fade-left" className="text-sm md:text-base">
           <div className="pb-4 ">
           I&apos;m a developer who thrives on continuous learning and adapting to new challenges. Whether it’s exploring emerging technologies or refining established practices, I’m driven by curiosity and a desire to grow. I focus on building flexible, accessible interfaces that evolve alongside user needs and industry trends—balancing clean design with resilient, future-ready code.
           </div>
@@ -46,7 +57,7 @@ export default function Home() {
         </div>
         <div id="projects">
           <Link target="_blank" href="https://noah-internship-2rt6b6pmr-snoklkls-projects.vercel.app/">  
-            <div className="flex flex-col xs:flex-row mt-10 xs:mt-20 p-4 items-center group item-hover-effect">
+            <div data-aos="fade-up" className="flex flex-col xs:flex-row mt-10 xs:mt-20 p-4 items-center group item-hover-effect">
                 <div className="xs:min-w-50 xs:max-w-50 h-full  xs:pr-10">
                   <Image src="/virtInternFullScreen.png" width={500} height={500} alt="Ultraverse Image" />
                 </div>
@@ -57,7 +68,7 @@ export default function Home() {
             </div>
           </Link>
           <Link target="_blank" href="https://flix-clone-snowy.vercel.app/">
-            <div className="flex flex-col xs:flex-row mt-5 p-4 items-center group item-hover-effect">
+            <div data-aos="fade-up" className="flex flex-col xs:flex-row mt-5 p-4 items-center group item-hover-effect">
                 <div className="xs:min-w-50 xs:max-w-50  h-full xs:pr-10">
                   <Image src="/netflixCloneFullScreen.png" width={500} height={500} alt="Netflix Clone Image" />
                 </div>
@@ -68,7 +79,7 @@ export default function Home() {
             </div>
           </Link>
           <Link target="_blank" href="https://n-cress.github.io/ytclone/"> 
-            <div className="flex flex-col xs:flex-row mt-5 p-4 items-center group item-hover-effect">
+            <div data-aos="fade-up" className="flex flex-col xs:flex-row mt-5 p-4 items-center group item-hover-effect">
                 <div className="xs:min-w-50 xs:max-w-50  h-full xs:pr-10">
                   <Image src="/ytCloneFullScreen.png" width={500} height={500} alt="Youtube Clone Image" />
                 </div>
@@ -79,7 +90,7 @@ export default function Home() {
             </div>
           </Link>
           <Link target="_blank" href="https://week6-reactfinal-movieapi.vercel.app/"> 
-            <div className="flex flex-col xs:flex-row mt-5 p-4 mb-20 items-center group item-hover-effect">
+            <div data-aos="fade-up" className="flex flex-col xs:flex-row mt-5 p-4 mb-20 items-center group item-hover-effect">
                 <div className="xs:min-w-50 xs:max-w-50  h-full xs:pr-10">
                   <Image src="/independentMovieApiFullScreen.png" width={600} height={500} alt="Ultraverse Image" />
                 </div>
@@ -91,7 +102,7 @@ export default function Home() {
           </Link>
         </div>
         <Link target="_blank" href="https://www.adcompsystems.com/">     
-          <div id="experience" className="items-center flex p-4 group item-hover-effect mb-12">
+          <div data-aos="fade-up" id="experience" className="items-center flex p-4 group item-hover-effect mb-12">
             <div className="mr-6 text-xs w-100">
               NOV 2022 - DEC 2023
             </div>
