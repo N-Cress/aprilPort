@@ -97,7 +97,7 @@ export default function Home() {
               <button 
               type="submit"
               disabled={loading || sent}
-              className={`mt-3 bg-blue-400 text-white pl-8 pr-8 pt-2 pb-2 rounded-2xl ${loading || sent ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}> {loading ? "Sending..." : "Send Message"} </button>
+              className={`mt-2 bg-blue-400 text-white pl-8 pr-8 pt-2 pb-2 rounded-2xl ${loading || sent ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}> {loading ? "Sending..." : "Send Message"} </button>
             </div>
             
           </form>
