@@ -5,17 +5,60 @@ import { FaLinkedinIn } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
 import { FaRegFilePdf } from "react-icons/fa6";
 import { FaLink } from "react-icons/fa";
+import { IoMdMail } from "react-icons/io";
+
 
 
 import Link from "next/link";
 import BackgroundEffect from "./components/backgroundEffect";
 import PageLinks from "./components/pageLinks";
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
-
+import emailjs from '@emailjs/browser';
 
 export default function Home() {
+  const [modal, setModal] = useState(false);
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [sent, setSent] = useState(false);
+  const [error, setError] = useState('');
+
+  const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+  const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+  const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+
+    try {
+      const result = await emailjs.send(
+        serviceId, 
+        templateId,
+        {
+          from_name: name,
+          from_email: email,
+          message: message
+        },
+        publicKey
+      );
+      console.log(result.text);
+      setSent(true);
+      setName('');
+      setEmail('');
+      setMessage('');
+    } catch (err) {
+      console.error(err);
+      setError('Failed to send. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
 
   useEffect(() => {
     AOS.init({
@@ -26,6 +69,45 @@ export default function Home() {
 
   return (
     <div id="about" className="flex flex-col items-start ml-4 mr-2 sm:ml-12 sm:mr-12 md:items-start md:flex-row md:justify-around md:ml-2 md:mr-2 pt-8 sm:pt-14 md:pt-28">
+      {modal && (
+        <div data-aos="fade-right" className="fixed bottom-8 right-0 p-4 w-100 md:mt-0 h-100 md:bottom-2 md:right-0  md:h-100 md:w-100 flex items-center justify-center z-50"> 
+          <form onSubmit={handleSubmit} className="bg-black h-full w-full flex flex-col items-center rounded-3xl border-2 border-black shadow-lg shadow-black ">
+          
+            <div className="pt-4 text-3xl flex justify-between w-full pl-16 pr-4 white"> 
+              <div> Connect with me!</div>
+              <div onClick={() => setModal(false)} className="cursor-pointer text-sm"> X</div>
+            </div>
+            
+            <div className="flex flex-col w-full items-center pl-5 pr-5 "> 
+              <label className="pt-3"> Name </label>
+              <input  onChange={(e) => setName(e.target.value)}
+                      required 
+                      className="focus:outline border-b-2 pl-2 rounded-sm text-white border-white focus:border-blue-400 w-full"/>
+              <label className=" pt-2"> Email </label>
+              <input  onChange={(e) => setEmail(e.target.value)}
+                      required 
+                      type="email"
+                      className="border-b-2 pl-2 border-white text-white w-full focus:outline focus:border-blue-400"/>
+              <label className=" pt-2"> Message</label>
+              <textarea onChange={(e) => setMessage(e.target.value)}
+                        required 
+                        className="resize-none border-b-2 pl-2 h-20 text-white text-start border-white w-full focus:outline focus:border-blue-400"/>
+              {error && <p className="mt-2 text-red-500">{error}</p>}
+              {sent && <p className="mt-2 text-green-500"> Thank you for your message</p>}
+              <button 
+              type="submit"
+              disabled={loading || sent}
+              className={`mt-3 bg-blue-400 text-white pl-8 pr-8 pt-2 pb-2 rounded-2xl ${loading || sent ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}> {loading ? "Sending..." : "Send Message"} </button>
+            </div>
+            
+          </form>
+        </div>
+      )}
+      {!modal && (
+        <div onClick={() => setModal(true)}className="z-50 group fixed border-black border-2 bg-white p-4 rounded-3xl bottom-8 right-8 cursor-pointer">
+        <IoMdMail className="group-hover:!text-blue-400 w-8 h-8 cursor-pointer" />
+        </div>
+      )}
       <BackgroundEffect />
       <div data-aos="fade-down" className="static md:sticky md:top-28 h-full ">
         <div  className="text-5xl font-bold white"> Noah Cress </div>
