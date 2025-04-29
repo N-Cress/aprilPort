@@ -8,7 +8,7 @@ import { FaLink } from "react-icons/fa";
 import { IoMdMail } from "react-icons/io";
 
 
-
+import validator from "validator";
 import Link from "next/link";
 import BackgroundEffect from "./components/backgroundEffect";
 import PageLinks from "./components/pageLinks";
@@ -26,23 +26,33 @@ export default function Home() {
   const [sent, setSent] = useState(false);
   const [error, setError] = useState('');
 
-  const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
-  const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
-  const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError('');
-
+    if (message.length > 1000) {
+      setError("Message too long. Please keep it under 1000 characters.");
+      setLoading(false);
+      return;
+    }
+    if (!validator.isEmail(email)) {
+      setError("Please enter a valid email.");
+      setLoading(false);
+      return;
+    }
+    const sanitizedMessage1st = sanitizeInput(message);
+    const sanitizedMessage2nd = validator.escape(sanitizedMessage1st);
+    const sanitizedName = sanitizeInput(name);
+    const sanitizedEmail = sanitizeInput(email);
     try {
       const result = await emailjs.send(
         serviceId, 
         templateId,
         {
-          from_name: name,
-          from_email: email,
-          message: message
+          from_name: sanitizedName,
+          from_email: sanitizedEmail,
+          message: sanitizedMessage2nd
         },
         publicKey
       );
@@ -62,13 +72,16 @@ export default function Home() {
 
   useEffect(() => {
     AOS.init({
-      duration: 800, // animation duration in ms
-      once: false, // whether animation should happen only once
-    })
+      once: false,  
+      duration: 800,  
+      easing: 'ease-out',  
+      offset: 100,  
+    });
   }, [])
 
   return (
     <div id="about" className="flex flex-col items-start ml-4 mr-2 sm:ml-12 sm:mr-12 md:items-start md:flex-row md:justify-around md:ml-2 md:mr-2 pt-8 sm:pt-14 md:pt-28">
+      <BackgroundEffect />
       {modal && (
         <div data-aos="fade-right" className="fixed bottom-8 right-0 p-4 w-100 md:mt-0 h-100 md:bottom-2 md:right-0  md:h-100 md:w-100 flex items-center justify-center z-50"> 
           <form onSubmit={handleSubmit} className="bg-black h-full w-full flex flex-col items-center rounded-3xl border-2 border-black shadow-lg shadow-black ">
@@ -91,13 +104,13 @@ export default function Home() {
               <label className=" pt-2"> Message</label>
               <textarea onChange={(e) => setMessage(e.target.value)}
                         required 
-                        className="resize-none border-b-2 pl-2 h-20 text-white text-start border-white w-full focus:outline focus:border-blue-400"/>
-              {error && <p className="mt-2 text-red-500">{error}</p>}
-              {sent && <p className="mt-2 text-green-500"> Thank you for your message</p>}
+                        className="resize-none border-b-2 pl-2 h-16 text-white text-start border-white w-full focus:outline focus:border-blue-400"/>
+              {error && <p className="mt-1 text-red-500">{error}</p>}
+              {sent && <p className="mt-1 text-green-500"> Thank you for your message</p>}
               <button 
               type="submit"
               disabled={loading || sent}
-              className={`mt-2 bg-blue-400 text-white pl-8 pr-8 pt-2 pb-2 rounded-2xl ${loading || sent ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}> {loading ? "Sending..." : "Send Message"} </button>
+              className={`mt-2  bg-blue-400 text-white pl-8 pr-8 pt-2 pb-2 rounded-2xl ${loading || sent ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}> {loading ? "Sending..." : "Send Message"} </button>
             </div>
             
           </form>
@@ -108,17 +121,17 @@ export default function Home() {
         <IoMdMail className="group-hover:!text-blue-400 w-8 h-8 cursor-pointer" />
         </div>
       )}
-      <BackgroundEffect />
-      <div data-aos="fade-down" className="static md:sticky md:top-28 h-full ">
+
+      <div data-aos="fade-down" className="fate-in-section relative z-20 pointer-events-auto md:sticky md:top-28 h-full ">
         <div  className="text-5xl font-bold white"> Noah Cress </div>
         <div className="pt-2 pb-4 text-xl white"> Front End Engineer </div>
         <div className="md:pb-18 w-80"> Striving to build user driven, responsive experiences for the web.</div>
         <div>
           <PageLinks />
-          <div className="flex pt-4 pb-12 md:pb-0 md:pt-80">
-            <Link target="_blank" href="https://www.linkedin.com/in/noah-c-47046795/"> <FaLinkedinIn className="w-8 h-8" /> </Link>
-            <Link target="_blank" href="https://github.com/N-Cress"> <FaGithub className="ml-6 w-8 h-8"/> </Link>
-            <Link target="_blank" href="/Noah-Resume-April.pdf"> <FaRegFilePdf className="ml-6 w-8 h-8"/> </Link>
+          <div className="relative z-20 flex pt-4 pb-12 md:pb-0 md:pt-80">
+            <Link target="_blank" href="https://www.linkedin.com/in/noah-c-47046795/"> <FaLinkedinIn className="z-1000 relative icon-blue-hover w-8 h-8" /> </Link>
+            <Link target="_blank" href="https://github.com/N-Cress"> <FaGithub className="icon-blue-hover ml-6 w-8 h-8"/> </Link>
+            <Link target="_blank" href="/Noah-Resume-April.pdf"> <FaRegFilePdf className="icon-blue-hover ml-6 w-8 h-8"/> </Link>
           </div>
         </div>
       </div>
@@ -131,7 +144,7 @@ export default function Home() {
           I&apos;m an aspiring front-end developer with a strong interest in accessibility and inclusive design. In my recent work and projects, I&apos;ve focused on building and refining UI components with accessibility best practices in mind—aiming to create user experiences that are both intuitive and inclusive. I&apos;m eager to contribute to teams that value thoughtful, user-centered development and to continue growing my skills in a collaborative environment.
           </div>
           <div className="pb-4">
-          I’ve spent the past year working in IT, where I built a strong foundation in tech and problem-solving. It was a great experience, but over time, I found myself increasingly drawn to web development. I started learning on my own, building small projects and getting hands-on with modern web technologies. Now I’m excited to take the next step and grow as a developer in a professional setting.
+          I&apos;ve spent the past year working in IT, where I built a strong foundation in tech and problem-solving. It was a great experience, but over time, I found myself increasingly drawn to web development. I started learning on my own, building small projects and getting hands-on with modern web technologies. Now I’m excited to take the next step and grow as a developer in a professional setting.
           </div>
           <div>
           In my free time, I enjoy reading, hiking, or playing whatever fighting game I&apos;m currently into.
@@ -139,7 +152,7 @@ export default function Home() {
         </div>
         <div id="projects">
           <Link target="_blank" href="https://noah-internship-2rt6b6pmr-snoklkls-projects.vercel.app/">  
-            <div data-aos="fade-up" className="flex flex-col xs:flex-row mt-10 xs:mt-20 p-4 items-center group item-hover-effect">
+            <div data-aos="fade-up" className="relative z-20 flex flex-col xs:flex-row mt-10 xs:mt-20 p-4 items-center group item-hover-effect ">
                 <div className="xs:min-w-50 xs:max-w-50 h-full  xs:pr-10">
                   <Image src="/virtInternFullScreen.png" width={500} height={500} alt="Ultraverse Image" />
                 </div>
@@ -150,7 +163,7 @@ export default function Home() {
             </div>
           </Link>
           <Link target="_blank" href="https://flix-clone-snowy.vercel.app/">
-            <div data-aos="fade-up" className="flex flex-col xs:flex-row mt-5 p-4 items-center group item-hover-effect">
+            <div data-aos="fade-up" className="relative z-20 flex flex-col xs:flex-row mt-5 p-4 items-center group item-hover-effect">
                 <div className="xs:min-w-50 xs:max-w-50  h-full xs:pr-10">
                   <Image src="/netflixCloneFullScreen.png" width={500} height={500} alt="Netflix Clone Image" />
                 </div>
@@ -161,7 +174,7 @@ export default function Home() {
             </div>
           </Link>
           <Link target="_blank" href="https://n-cress.github.io/ytclone/"> 
-            <div data-aos="fade-up" className="flex flex-col xs:flex-row mt-5 p-4 items-center group item-hover-effect">
+            <div data-aos="fade-up" className="relative z-20 flex flex-col xs:flex-row mt-5 p-4 items-center group item-hover-effect">
                 <div className="xs:min-w-50 xs:max-w-50  h-full xs:pr-10">
                   <Image src="/ytCloneFullScreen.png" width={500} height={500} alt="Youtube Clone Image" />
                 </div>
@@ -172,7 +185,7 @@ export default function Home() {
             </div>
           </Link>
           <Link target="_blank" href="https://week6-reactfinal-movieapi.vercel.app/"> 
-            <div data-aos="fade-up" className="flex flex-col xs:flex-row mt-5 p-4 mb-20 items-center group item-hover-effect">
+            <div data-aos="fade-up" className="relative z-20 flex flex-col xs:flex-row mt-5 p-4 mb-20 items-center group item-hover-effect">
                 <div className="xs:min-w-50 xs:max-w-50  h-full xs:pr-10">
                   <Image src="/independentMovieApiFullScreen.png" width={600} height={500} alt="Ultraverse Image" />
                 </div>
@@ -184,7 +197,7 @@ export default function Home() {
           </Link>
         </div>
         <Link target="_blank" href="https://www.adcompsystems.com/">     
-          <div data-aos="fade-up" id="experience" className="items-center flex p-4 group item-hover-effect mb-12">
+          <div data-aos="fade-up" id="experience" className="relative items-center z-20 pointer-events-auto flex p-4 group item-hover-effect mb-12">
             <div className="mr-6 text-xs w-100">
               NOV 2022 - DEC 2023
             </div>
@@ -200,6 +213,7 @@ export default function Home() {
           Built within Visual Studio Code, using NextJS and TailwindCSS. Deployed with Vercel.
         </div>
       </div>
+      
     </div>
   );
 }

@@ -36,8 +36,8 @@ export default function BackgroundEffect() {
       animationFrame.current = requestAnimationFrame(animate);
     };
 
-    container.addEventListener('mousemove', handleMouseMovement);
-    container.addEventListener('mouseleave', handleMouseLeave);
+    window.addEventListener('mousemove', handleMouseMovement);
+    window.addEventListener('mouseleave', handleMouseLeave);
     animationFrame.current = requestAnimationFrame(animate);
 
     return () => {
@@ -48,8 +48,8 @@ export default function BackgroundEffect() {
   }, []);
 
   return (
-    <div ref={containerRef} className="absolute inset-0">
-      <div ref={overlayRef} className="fixed z-[-1] inset-0 pointer-events-none transition-all duration-200" />
+    <div ref={containerRef} className="fixed z-1 inset-0">
+      <div ref={overlayRef} className="fixed z-[-1] inset-0  transition-all duration-200" />
     </div>
   );
 }
