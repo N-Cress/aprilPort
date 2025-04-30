@@ -83,8 +83,8 @@ export default function Home() {
     <div id="about" className="flex flex-col items-start ml-4 mr-2 sm:ml-12 sm:mr-12 md:items-start md:flex-row md:justify-around md:ml-2 md:mr-2 pt-8 sm:pt-14 md:pt-28">
       <BackgroundEffect />
       {modal && (
-        <div data-aos="fade-right" className="fixed bottom-8 right-0 p-4 w-100 md:mt-0 h-100 md:bottom-2 md:right-0  md:h-100 md:w-100 flex items-center justify-center z-50"> 
-          <form onSubmit={handleSubmit} className="bg-black h-full w-full flex flex-col items-center rounded-3xl border-2 border-black shadow-lg shadow-black ">
+        <div data-aos="fade-right" className="fixed bottom-8 right-0 opacity-0 p-4 w-100 md:mt-0 h-100 md:bottom-2 md:right-0  md:h-100 md:w-100 flex items-center justify-center z-100"> 
+          <form onSubmit={handleSubmit} className="bg-[#0F172A] opacity-90 h-full w-full flex flex-col items-center rounded-3xl border-1 border-black shadow-lg shadow-black ">
           
             <div className="pt-4 text-3xl flex justify-between w-full pl-16 pr-4 white"> 
               <div> Connect with me!</div>
@@ -110,7 +110,7 @@ export default function Home() {
               <button 
               type="submit"
               disabled={loading || sent}
-              className={`mt-2  bg-blue-400 text-white pl-8 pr-8 pt-2 pb-2 rounded-2xl ${loading || sent ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}> {loading ? "Sending..." : "Send Message"} </button>
+              className={` bg-blue-400 text-white pl-8 pr-8 pt-2 pb-2 rounded-2xl ${error || sent ? "mt-2" : "mt-8"} ${loading || sent ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}> {loading ? "Sending..." : "Send Message"} </button>
             </div>
             
           </form>
@@ -135,7 +135,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div  className="w-full md:max-w-100 lg:max-w-160 xl:max-w-220">
+      <div  className="w-full z-20 md:max-w-100 lg:max-w-160 xl:max-w-220">
         <div data-aos="fade-left" className="text-sm md:text-base">
           <div className="pb-4 ">
           I&apos;m a developer who thrives on continuous learning and adapting to new challenges. Whether it’s exploring emerging technologies or refining established practices, I’m driven by curiosity and a desire to grow. I focus on building flexible, accessible interfaces that evolve alongside user needs and industry trends—balancing clean design with resilient, future-ready code.
