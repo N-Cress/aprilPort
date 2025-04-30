@@ -27,11 +27,11 @@ export default function BackgroundEffect() {
     };
 
     const animate = () => {
-      currentPos.current.x += (mousePos.current.x - currentPos.current.x) * 0.2;
-      currentPos.current.y += (mousePos.current.y - currentPos.current.y) * 0.2;
+      currentPos.current.x += (mousePos.current.x - currentPos.current.x) * 0.1;
+      currentPos.current.y += (mousePos.current.y - currentPos.current.y) * 0.1;
 
       const { x, y } = currentPos.current;
-      overlay.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(255, 255, 255, 0.15), transparent 200px)`;
+      overlay.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(79, 144, 219, 0.3), transparent 100px)`;
 
       animationFrame.current = requestAnimationFrame(animate);
     };

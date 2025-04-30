@@ -26,6 +26,24 @@ export default function Home() {
   const [sent, setSent] = useState(false);
   const [error, setError] = useState('');
 
+  const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+  const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+  const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+
+
+  function sanitizeInput(input) {
+    if (typeof input !== 'string') return '';
+
+    let sanitized = input.replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '');
+    sanitized = sanitized.replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '');
+  
+    sanitized = sanitized.replace(/<\/?[^>]+(>|$)/g, '');
+  
+    sanitized = sanitized.replace(/[<>]/g, '');
+    sanitized = sanitized.trim();
+  
+    return sanitized;
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -41,6 +59,8 @@ export default function Home() {
       setLoading(false);
       return;
     }
+
+
     const sanitizedMessage1st = sanitizeInput(message);
     const sanitizedMessage2nd = validator.escape(sanitizedMessage1st);
     const sanitizedName = sanitizeInput(name);
@@ -91,26 +111,26 @@ export default function Home() {
               <div onClick={() => setModal(false)} className="cursor-pointer text-sm"> X</div>
             </div>
             
-            <div className="flex flex-col w-full items-center pl-5 pr-5 "> 
-              <label className="pt-3"> Name </label>
+            <div className="flex flex-col w-full items-center pt-4 pl-5 pr-5 "> 
               <input  onChange={(e) => setName(e.target.value)}
                       required 
-                      className="focus:outline border-b-2 pl-2 rounded-sm text-white border-white focus:border-blue-400 w-full"/>
-              <label className=" pt-2"> Email </label>
+                      placeholder="Name"
+                      className="focus:outline pt-2 border-b-2 pl-2 placeholder-grey rounded-sm text-white border-white focus:border-blue-400 w-full"/>
               <input  onChange={(e) => setEmail(e.target.value)}
+                      placeholder="Email"
                       required 
                       type="email"
-                      className="border-b-2 pl-2 border-white text-white w-full focus:outline focus:border-blue-400"/>
-              <label className=" pt-2"> Message</label>
+                      className="border-b-2 pl-2 pt-2 mt-2  border-white placeholder-grey text-white w-full focus:outline focus:border-blue-400"/>
               <textarea onChange={(e) => setMessage(e.target.value)}
                         required 
-                        className="resize-none border-b-2 pl-2 h-16 text-white text-start border-white w-full focus:outline focus:border-blue-400"/>
+                        placeholder="Message"
+                        className="resize-none mt-2 border-b-2 pl-2 h-24 placeholder-grey text-white text-start border-b-white  w-full focus:outline focus:border-blue-400"/>
               {error && <p className="mt-1 text-red-500">{error}</p>}
               {sent && <p className="mt-1 text-green-500"> Thank you for your message</p>}
               <button 
               type="submit"
               disabled={loading || sent}
-              className={` bg-blue-400 text-white pl-8 pr-8 pt-2 pb-2 rounded-2xl ${error || sent ? "mt-2" : "mt-8"} ${loading || sent ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}> {loading ? "Sending..." : "Send Message"} </button>
+              className={` bg-blue-400 text-white pl-8 pr-8 pt-2 pb-2 rounded-2xl ${error || sent ? "mt-4" : "mt-12"} ${loading || sent ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}> {loading ? "Sending..." : "Send Message"} </button>
             </div>
             
           </form>
@@ -136,7 +156,7 @@ export default function Home() {
         </div>
       </div>
       <div  className="w-full z-20 md:max-w-100 lg:max-w-160 xl:max-w-220">
-        <div data-aos="fade-left" className="text-sm md:text-base">
+        <div data-aos="fade-left" className="pl-4 text-sm md:text-base">
           <div className="pb-4 ">
           I&apos;m a developer who thrives on continuous learning and adapting to new challenges. Whether it’s exploring emerging technologies or refining established practices, I’m driven by curiosity and a desire to grow. I focus on building flexible, accessible interfaces that evolve alongside user needs and industry trends—balancing clean design with resilient, future-ready code.
           </div>
@@ -150,9 +170,9 @@ export default function Home() {
           In my free time, I enjoy reading, hiking, or playing whatever fighting game I&apos;m currently into.
           </div>
         </div>
-        <div id="projects">
+        <div id="projects" className="" >
           <Link target="_blank" href="https://noah-internship-2rt6b6pmr-snoklkls-projects.vercel.app/">  
-            <div data-aos="fade-up" className="relative z-20 flex flex-col xs:flex-row mt-10 xs:mt-20 p-4 items-center group item-hover-effect ">
+            <div data-aos="fade-up" className="relative z-20 flex flex-col xs:flex-row mt-10 xs:mt-20 p-4 mr-4 items-start group item-hover-effect ">
                 <div className="xs:min-w-50 xs:max-w-50 h-full  xs:pr-10">
                   <Image src="/virtInternFullScreen.png" width={500} height={500} alt="Ultraverse Image" />
                 </div>
