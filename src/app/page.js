@@ -142,7 +142,7 @@ export default function Home() {
         </div>
       )}
 
-      <div data-aos="fade-down" className="fate-in-section relative z-20 pointer-events-auto md:sticky md:top-28 h-full ">
+      <div data-aos="fade-down" className="fate-in-section pl-4 md:pl-4 relative z-20 pointer-events-auto md:sticky md:top-28 h-full ">
         <div  className="text-5xl font-bold white"> Noah Cress </div>
         <div className="pt-2 pb-4 text-xl white"> Front End Engineer </div>
         <div className="md:pb-18 w-80"> Striving to build user driven, responsive experiences for the web.</div>
