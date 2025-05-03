@@ -171,8 +171,9 @@ export default function Home() {
           </div>
         </div>
         <div id="projects" className="" >
+        <hr data-aos="fade-in" className="border-gray-400 mt-10" />
           <Link target="_blank" href="https://noah-internship-2rt6b6pmr-snoklkls-projects.vercel.app/">  
-            <div data-aos="fade-up" className="relative z-20 flex flex-col xs:flex-row mt-10 xs:mt-20 p-4 mr-4 items-start group item-hover-effect ">
+            <div data-aos="fade-up" className="relative z-20 flex flex-col xs:flex-row mt-10 xs:mt-10 p-4 mr-4 items-start group item-hover-effect ">
                 <div className="xs:min-w-50 xs:max-w-50 h-full  xs:pr-10">
                   <Image src="/virtInternFullScreen.png" width={500} height={500} alt="Ultraverse Image" />
                 </div>
@@ -205,7 +206,7 @@ export default function Home() {
             </div>
           </Link>
           <Link target="_blank" href="https://week6-reactfinal-movieapi.vercel.app/"> 
-            <div data-aos="fade-up" className="relative z-20 flex flex-col xs:flex-row mt-5 p-4 mb-20 items-center group item-hover-effect">
+            <div data-aos="fade-up" className="relative z-20 flex flex-col xs:flex-row mt-5 p-4 mb-10 items-center group item-hover-effect">
                 <div className="xs:min-w-50 xs:max-w-50  h-full xs:pr-10">
                   <Image src="/independentMovieApiFullScreen.png" width={600} height={500} alt="Ultraverse Image" />
                 </div>
@@ -216,6 +217,7 @@ export default function Home() {
             </div>
           </Link>
         </div>
+        <hr class="border-gray-400 mb-10" data-aos="fade-in"/>
         <Link target="_blank" href="https://www.adcompsystems.com/">     
           <div data-aos="fade-up" id="experience" className="relative items-center z-20 pointer-events-auto flex p-4 group item-hover-effect mb-12">
             <div className="mr-6 text-xs w-100">
