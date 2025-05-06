@@ -94,8 +94,7 @@ export default function Home() {
     AOS.init({
       once: false,  
       duration: 800,  
-      easing: 'ease-out',  
-      offset: 100,  
+      easing: 'ease-out',   
     });
   }, [])
 
