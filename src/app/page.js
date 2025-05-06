@@ -217,7 +217,7 @@ export default function Home() {
             </div>
           </Link>
         </div>
-        <hr class="border-gray-400 mb-10" data-aos="fade-in"/>
+        <hr className="border-gray-400 mb-10" data-aos="fade-in"/>
         <Link target="_blank" href="https://www.adcompsystems.com/">     
           <div data-aos="fade-up" id="experience" className="relative items-center z-20 pointer-events-auto flex p-4 group item-hover-effect mb-12">
             <div className="mr-6 text-xs w-100">
